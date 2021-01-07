@@ -1,0 +1,56 @@
+<div class="circle"></div>
+<div class="rectangle">
+  <div class="part-circle"><div>
+
+
+</div>
+
+
+<style>
+  body{
+    background:#19191A;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+  }
+  .circle {
+   	position: absolute;
+    top:50px;
+    width: 150px;
+    height: 150px;
+    background: #4F77FF;
+   	border-radius: 50%
+  }
+  
+  .rectangle{
+    background:#F9E492;
+    position:absolute;
+    top:124.5px;;
+    left:127px;
+    width:73px;
+    height:124;
+    overflow: hidden;
+    
+  }
+  .part-circle {
+ 	position:relative;
+    top:-73px;
+    width: 150px;
+    height: 150px;
+
+   	border-radius: 50%;
+    background: #9AD5FF;
+   
+   
+   
+  }
+  
+</style>
+
+<!-- OBJECTIVE -->
+<!-- Write HTML/CSS in this editor and replicate the given target image in the least code possible. What you write here, renders as it is -->
+
+<!-- SCORING -->
+<!-- The score is calculated based on the number of characters you use (this comment included :P) and how close you replicate the image. Read the FAQS (https://cssbattle.dev/faqs) for more info. -->
+
+<!-- IMPORTANT: remove the comments before submitting -->
