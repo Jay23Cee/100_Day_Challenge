@@ -69,29 +69,42 @@ class Node:
         return res
 
 
+def stringtotree(string):
+  
+    string = string_s.split(',')
+    for x in range(len(string)-1):
+        if x == 0:
+            new_root = Node(int(string[x]))
+        else:
+            new_root.insert(int(string[x]))
+
+    return new_root
+
+
+
 def treeToString(root:Node , string:list):
     # base case
-    if root is None:
+    if root is None or root is '':
         return
     
     # push the root data as character
     string.append(str(root.data))
-
+    string.append(',')
     #if leaf node, then return node
     if not root.left and not root.right:
         return
     
     # for left subtree
-    string.append('(')
+    # string.append('(')
     treeToString(root.left, string)
-    string.append(')')
+    # string.append(')')
 
     #only if right child is present to
     #avoid extra parenthesis
     if root.right:
-        string.append('(')
+        # string.append('(')
         treeToString(root.right, string)
-        string.append(')')
+        # string.append(')')
 
 
 
@@ -108,7 +121,20 @@ if __name__ == "__main__":
 
     string =[]
     treeToString(root,string)
-    print(''.join(string))
+    string_s=''.join(string)
+    #print(root.PrintTree())
+    # print(root.PreorderTraversal(root))
     print(root.inorderTraversal(root))
-    print(root.PreorderTraversal(root))
-        
+    
+    new_tree = stringtotree(string_s)
+
+
+    #(new_tree.PrintTree())
+    print(new_tree.inorderTraversal(new_tree))
+
+
+    
+
+
+
+ 
