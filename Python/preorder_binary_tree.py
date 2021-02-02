@@ -1,3 +1,6 @@
+import sys
+import math
+
 class Node:
 
     def __init__(self, data):
@@ -46,10 +49,16 @@ class Node:
         if self.right:
             self.right.PrintTree()
 
+#Recursive function to construct binary tree
+
+
+
+
+
 
 #Inorder traversal
 #left -> Root -> right
-    def inorderTraversal(self, root):
+    def inorderTraversal(root):
         res=[]
         if root:
             res = self.inorderTraversal(root.left)
@@ -60,16 +69,17 @@ class Node:
 
 #Preorder Traversal
 #Root -> Left -> Right
-    def PreorderTraversal(self, root):
-        res =[]
-        if root:
-            res.append(root.data)
-            res = res + self.PreorderTraversal(root.left)
-            res = res + self.PreorderTraversal(root.right)
-        return res
+def PreorderTraversal(root):
+    if not root:
+        return
+    
+    print("{}".format(root.data), end=" ")
+    PreorderTraversal(root.left)
+    PreorderTraversal(root.right)
 
 
-def stringtotree(string):
+
+def stringtotree(string_s):
   
     string = string_s.split(',')
     for x in range(len(string)-1):
@@ -107,30 +117,76 @@ def treeToString(root:Node , string:list):
         # string.append(')')
 
 
+def buildTreeUtil(nodes,start,end):
+    #base case
+    if start>end:
+        return None
+    
+    #Get the middle element and make it root
+    mid=(start+end)//2
+    node=nodes[mid]
+    
+    #Using index in Inorder traversal, construct 
+    #Left and right subtress
+    node.left = buildTreeUtil(nodes, start, mid-1)
+    node.right =  buildTreeUtil(nodes,mid+1, end)
+    return node
+
+#This function converts an unbalanced BST to a Balance BST
+def buildTree(root):
+    #store nodes of given BST insorted order
+    nodes=[]
+    storeBSTNodes(root,nodes)
+
+    #constructs BST from nodes[]
+    n=len(nodes)
+    return buildTreeUtil(nodes,0,n-1)
+
+#Recursive function to construct binary tree
+def storeBSTNodes(root,nodes):
+    #base case
+    if not root:
+        return
+    
+    #Stores nodes in Inorder ( which is sorted 
+    # order for BST)
+    storeBSTNodes(root.left,nodes)
+    nodes.append(root)
+    storeBSTNodes(root.right,nodes)
+
+
+#
 
 
 
 if __name__ == "__main__": 
-    root = Node(27)
-    root.insert(14)
-    root.insert(35)
-    root.insert(10)
-    root.insert(19)
-    root.insert(31)
-    root.insert(42)
+    # root = Node(27)
+    # root.insert(14)
+    # root.insert(35)
+    # root.insert(10)
+    # root.insert(19)
+    # root.insert(31)
+    # root.insert(42)
 
-    string =[]
-    treeToString(root,string)
-    string_s=''.join(string)
-    #print(root.PrintTree())
-    # print(root.PreorderTraversal(root))
-    print(root.inorderTraversal(root))
+    # string =[]
+    # treeToString(root,string)
+    # string_s=''.join(string)
+    # #print(root.PrintTree())
+    # # print(root.PreorderTraversal(root))
+    # print(root.inorderTraversal(root))
     
-    new_tree = stringtotree(string_s)
+    # new_tree = stringtotree(string_s)
+    # #(new_tree.PrintTree())
+    # print(new_tree.inorderTraversal(new_tree))
 
-
-    #(new_tree.PrintTree())
-    print(new_tree.inorderTraversal(new_tree))
+    root = Node(10)
+    root.left = Node(8)
+    root.left.left= Node(7)
+    root.left.left.left =Node(6)
+    root.left.left.left.left =  Node(5)
+    root= buildTree(root)
+    print("PrintOrder traveral of balance BST is :" )
+    PreorderTraversal(root)
 
 
     
