@@ -28,7 +28,76 @@ class LinkedList:
 
         #While both list exists
         while (first is not None or second is not None):
+            #calculate the value of the next digit in
+            # result listthe next digit is sum of following things
+            # (i) carry
+            # (ii) next digit of first list (if there is a next digit)
+            # (iii) next digit of second list( if there is a next digit)
+
+            fdata = 0 if first is None else first.data
+            sdata = 0 if second is None else second.data
+            Sum = carry + fdata + sdata
+
+            #update carry for next calculation
+            carry = 1 if Sum >= 10 else 0
+
+            #update sum if it is greater than 10
+            Sum = Sum if Sum < 10 else Sum % 10
+
+            #Create a new node with sum as data
+            temp = Node(Sum)
+
+            #If this is the first node then set it as head
+            #of resultant list
+            if self.head is None:
+                self.head = temp
+            else:
+                prev.next = temp
+                
+            #self prev for next insertion
+            prev = temp
+
+            #move first and second pointers to next nodes
+            if first is not None:
+                first = first.next
+            if second is not None:
+                second = second.next
+
+        if carry > 0 :
+            temp.next = Node(carry)
+    
+    #Utility function to print the linked LinkedList
+    def printList(self):
+        temp = self.head
+        while(temp):
+            print (temp.data),
+            temp = temp.next
+
+
+#First 2 first = LinkedList()
+first = LinkedList()
+second = LinkedList()
+
+#Create first list
+first.push(6)
+first.push(4)
+first.push(9)
+first.push(5)
+first.push(7)
+print("First List is ")
+first.printList()
+
+#Create second list
+second.push(4)
+second.push(8)
+print("\nSecond List is ")
+second.printList()
+
+#Add the two lists and see result
+res = LinkedList()
+res.addTwoLists(first.head, second.head)
+print("\nResultant list is ")
+res.printList()
+
+
             
-
-
-        
