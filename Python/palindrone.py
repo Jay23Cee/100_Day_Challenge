@@ -35,3 +35,15 @@ class LinkedList:
         while (temp):
             print (temp.data),
             temp = temp.next
+
+
+#Driver program to test above function
+llist = LinkedList()
+llist.head = Node('a')
+llist.head.next = Node('bc')
+llist.head.next.next = Node("d")
+llist.head.next.next.next = Node("dcb")
+llist.head.next.next.next.next = Node("a")
+print('True' if llist.isPalindrome() else "false")
+
+    
