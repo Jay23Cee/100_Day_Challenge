@@ -7,7 +7,7 @@ class Node(object):
         self.next = next
         self.prev = prev
     
-    class doubly_linked_list(object):
+class double_linked_list(object):
         def __init__(self):
                 self.head = None
                 self.tail = None
@@ -25,6 +25,17 @@ class Node(object):
                 self.tail= new_item
             
             self.count +=1
-            
-    
+
+items = double_linked_list()
+
+items.append_item("Python")
+items.append_item("PHP")
+items.append_item("C++")
+items.append_item("C#")
+items.append_item("Java")
+items.append_item("Javascript")
+items.append_item("SQL")
+
+
+print("Number of items of the DoublE linked list:", items.count)
         
