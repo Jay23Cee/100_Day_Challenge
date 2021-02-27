@@ -50,3 +50,14 @@ def preOrder(node):
 
 
 
+root = TreeNode(5)
+root.left = TreeNode(3)
+root.right = TreeNode(6)
+root.left.left = TreeNode(2)
+root.left.right = TreeNode(4)
+root.left.right.left = TreeNode(7)
+print("Original node:")
+print(preOrder(root))
+result = delete_Node(root, 2)
+print("After deleting specified node:")
+print(preOrder(result))
