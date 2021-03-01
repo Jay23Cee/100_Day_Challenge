@@ -127,6 +127,8 @@ print(root.findval(7))
 print(root.findval(14))
 
 
-
+print(root.findval(27))
 print("\n delete")
-root = deleteNode(root,31)
+root = deleteNode(root,27)
+
+print(root.findval(27))
