@@ -6,13 +6,13 @@ type Getter interface{
 }
 
 type Adder interface{
-	Ad(item Item)
+	Add(item Item)
 
 }
 
 
 type Item struct{
-Title string `json:"title`
+Title string `json:"title"`
 Post string `json:"post"`
 
 }
