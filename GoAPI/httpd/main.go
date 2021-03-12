@@ -32,6 +32,10 @@ func handleRequest() {
 
 	// a good base midwarestack
 
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
 
 	//Set a timeout value on the request context (ctx), that will signal
 	//through ctx.Done() that the request has timed out and further
