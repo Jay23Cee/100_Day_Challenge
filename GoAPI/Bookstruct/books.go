@@ -4,6 +4,10 @@ type Getter interface{
 	GetAll() []Book
 }
 
+type Adder interface{
+	Add(book Book)
+
+}
 
 type Book struct{
 	Title string `json:"title`
