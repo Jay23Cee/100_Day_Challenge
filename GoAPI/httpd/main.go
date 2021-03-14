@@ -46,6 +46,7 @@ func handleRequest() {
 	r.Get("/", helloWorld)
 	r.Get("/Books", handler.AllBooks)
 	r.Post("/Books/{title}/{author}", handler.BooksCreate)
+	r.Delete("/Books/{title}/{author}", handler.DeleteBook)
 	fmt.Println("Serving on" + port)
 	log.Fatal(http.ListenAndServe(port, r))
 
