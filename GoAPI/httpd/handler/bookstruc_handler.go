@@ -17,12 +17,6 @@ var db *gorm.DB
 var err error
 var t = time.Now().Format("02-Jan-2006 15:04:05")
 
-type Book struct{
-	Title string `json:"title"`
-	Author string `json:"author"`
-	Time string `json:"time"`
-
-}
 
 func InitialMigration(){
 	db, err = gorm.Open("sqlite3", "test.db")
@@ -65,10 +59,39 @@ func BooksCreate(w http.ResponseWriter, r *http.Request){
 	author := chi.URLParam(r, "author")
 	time := t
 
-	db.Create(&Book{Title:title, Author:author, Time:time})
+	db.Create(&Bookstruct.Book{Title:title, Author:author, Time:time})
 
 	fmt.Fprintf(w, "New Book Successfull Created")
 
 }
+
+
+func DeleteBook(w http.ResponseWriter, r *http.Request){
+	db, err = gorm.Open("sqlite3", "test.db")
+	if err != nil{
+		fmt.Println("Failedtoconnect to database")
+	}
+
+	defer db.Close()
+
+	
+	title := chi.URLParam(r, "title")
+	author := chi.URLParam(r, "author")
+
+	var book Bookstruct.Book
+	
+	if err := db.Where("title=?", title).Where("author=?",author).First(&book).Error; err != nil {
+		fmt.Fprintf(w, "Book is not on File")
+	  }else{
+		db.Delete(&book)
+
+		fmt.Fprintf(w, "Book Sucessfully Deleted")
+
+	  }
+	
+
+
+}
+
 
 
