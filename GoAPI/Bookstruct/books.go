@@ -12,9 +12,9 @@ type Adder interface {
 
 type Book struct {
 	gorm.Model
-	Title  string `json:"title`
-	Author string `json:"author`
-	Time   string `json:"time`
+	Title  string 
+	Author string
+	Time   string 
 }
 
 type Repo struct {
