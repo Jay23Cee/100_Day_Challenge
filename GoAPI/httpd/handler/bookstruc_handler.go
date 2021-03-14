@@ -17,7 +17,7 @@ var db *gorm.DB
 var err error
 var t = time.Now().Format("02-Jan-2006 15:04:05")
 
-
+//Initializing the Database
 func InitialMigration(){
 	db, err = gorm.Open("sqlite3", "test.db")
 	if err !=nil{
@@ -30,7 +30,7 @@ func InitialMigration(){
 	db.AutoMigrate(&Bookstruct.Book{})
 }
 
-
+// Getting all the books in the database
 func AllBooks(w http.ResponseWriter, r *http.Request){
 	db, err = gorm.Open("sqlite3", "test.db")
 	if err !=nil{
@@ -45,7 +45,7 @@ func AllBooks(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(books)
 }
 
-
+//Creating a book and storing it to the databse
 func BooksCreate(w http.ResponseWriter, r *http.Request){
 	db, err = gorm.Open("sqlite3", "test.db")
 	if err !=nil{
@@ -65,7 +65,7 @@ func BooksCreate(w http.ResponseWriter, r *http.Request){
 
 }
 
-
+// Deleting a selected book from the database
 func DeleteBook(w http.ResponseWriter, r *http.Request){
 	db, err = gorm.Open("sqlite3", "test.db")
 	if err != nil{
@@ -88,10 +88,45 @@ func DeleteBook(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Book Sucessfully Deleted")
 
 	  }
+
+}
+
+
+//Updating a book from the datase
+func UpdateBook(w http.ResponseWriter, r *http.Request){
+	db, err = gorm.Open("sqlite3", "test.db")
+	if err != nil{
+		fmt.Println("Failedtoconnect to database")
+	}
+
+	defer db.Close()
+
+	
+	title := chi.URLParam(r, "title")
+	author := chi.URLParam(r, "author")
+
+	var book Bookstruct.Book
+
+	if err := db.Where("title=?", title).Where("author=?",author).First(&book).Error; err != nil {
+		fmt.Fprintf(w, "Book is not on File")
+	  }else{
+		
+		book.Title = title
+		book.Author = author
+		db.Save(&book)
+		fmt.Fprintf(w, "Book Sucessfully Updated")
+
+	  }
+
 	
 
 
+
+
+
+	fmt.Fprintf(w, "Sucessfully Updated User")
 }
+
 
 
 
