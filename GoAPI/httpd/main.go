@@ -8,6 +8,7 @@ import (
 
 	"GoAPI/Bookstruct"
 	"GoAPI/httpd/handler"
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -25,7 +26,7 @@ func handleRequest() {
 	feed.Add(Bookstruct.Book{
 		Title:  "Hello",
 		Author: "Jackson",
-		Time:t.Format("01-22-2019"),
+		Time:   t.Format("01-22-2019"),
 	})
 
 	r := chi.NewRouter()
@@ -47,6 +48,7 @@ func handleRequest() {
 	r.Get("/Books", handler.AllBooks)
 	r.Post("/Books/{title}/{author}", handler.BooksCreate)
 	r.Delete("/Books/{title}/{author}", handler.DeleteBook)
+	r.Put("/Books/{title}/{author}", handler.UpdateBook)
 	fmt.Println("Serving on" + port)
 	log.Fatal(http.ListenAndServe(port, r))
 
