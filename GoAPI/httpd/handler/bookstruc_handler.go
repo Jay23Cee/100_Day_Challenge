@@ -107,7 +107,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 
 	var book Bookstruct.Book
 
-	if err := db.Where("title=?", title).Where("author=?",author).First(&book).Error; err != nil {
+	if err := db.Where("title=?", title).First(&book).Error; err != nil {
 		fmt.Fprintf(w, "Book is not on File")
 	  }else{
 		
