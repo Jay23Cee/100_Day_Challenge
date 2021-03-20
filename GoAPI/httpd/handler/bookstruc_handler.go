@@ -93,6 +93,8 @@ func DeleteBook(w http.ResponseWriter, r *http.Request){
 
 
 //Updating a book from the datase
+//This will need a emmet due to having the previous
+// book to update the new book.
 func UpdateBook(w http.ResponseWriter, r *http.Request){
 	db, err = gorm.Open("sqlite3", "test.db")
 	if err != nil{
